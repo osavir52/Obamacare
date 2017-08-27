@@ -1,4 +1,4 @@
-# Obamacare
+# Did Obamacare enrollees as a group vote for Trump?
 In December of 2016, Vox's Sarah Kliff traveled to Corbin, KY to interview voters who were enrolled in Obamacare but had voted for Donald Trump for President, including even an Obamacare enrollment counselor. This finding was intriguing - but it left one wondering whether it was a coincidence of Corbin, KY or a phenomenon observable nation-wide.
 
 Thirty-eight U.S. states utilize the Affordable Care Act's marketplace exchanges, and enrollment data for these states can be found on the Health and Human Services website. Unfortunately, since Kentucky has its own progra modeled after Obamcare, it's not included in the data - but it's still interesting to look into what is available. Can enrollment in Obamacare be used to predict whether or not a given county flipped from voting for Barack Obama in 2012 to voting for Donald Trump in 2016?
