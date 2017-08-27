@@ -5,9 +5,15 @@ Thirty-eight U.S. states utilize the Affordable Care Act's marketplace exchanges
 
 To investigate this, I've utilized the HHS enrollment data for the ACA and county-level election results,, as well data on other identifying factors for "Trump" counties - the median age; percent of population with a high school education or lower; the net migration expressed as a positive (net immigration into) or negative (net emigraton from) percent of the population; the total population; and the percent of the population that was caucasian. Data on the unemployment rate was also obtained, but because it lacked identifying information such as FIPS code or State associated with county (becauase many states have the same county name), it unfortunately could not be used.
 
-I used linear regression to model which counties flipped from Obama 2012 to Trump 2016, using the above factors. However, this being geographic data, there is always the possibility that the resulting model would overutilize spatial autocorrelation to generate accurate results. To monitor this, I used Moran's I, spatial lag and error tests, and a Breusch-Pagan test to account for spatial dependence in the model.
+I used linear regression to model which counties flipped from Obama 2012 to Trump 2016, using the above factors. However, this being geographic data, there is always the possibility that the resulting model would overutilize spatial autocorrelation to generate accurate results. In order to account for spatial dependence, I measured the spatial relationships of individual counties based on contiguity — counties that share borders were considered to be neighbors, “shared borders” defined as borders that share at least a single point (“Queen” configuration). 
 
-As a first step, I used a Moran's I test to determine the influence of spatial dependence on a any regression model that might be built, with results as follows:
+While some counties in the U.S. are virtual squares, in no state are counties arrayed in a perfect grid, and most counties are irregular polygons. Therefore, most counties that share a border share a significant border — in other words, there are few if any pairs of counties that are contiguous but share such a small border that their neighboring one another does not reflect any shared characteristics (an argument can be made that larger counties do in fact share borders without sharing characteristics; however, by the same token, since county lines are drawn politically or arbitrarily, a point on the border of a large county may just as well not share any characteristics with a point in its center or on an opposite border).
+
+In constructing spatial weight matrices, I opted for row standardized weighting. Due to the irregular shape and lack of consistency in size across most counties, it is assumed there may be some counties that are overrepresented by binary weighting.
+
+Moran’s I testing was utilized to test for the influence of spatial dependence upon the value of Trump’s percentage of the vote per county. As we will see, it was found that spatial dependence did impact the result, and spatial lag regression as well as spatial error regression were both used, with a Breusch-Pagan test was to determine whether or not the lag and error models still retained any spatial dependence within the final model. All regressions were performed with α = .05.
+
+The results of the Moran's I test show the influence of spatial dependence on a any regression model that might be built:
 
 ![Moran's I table](/aca_table_moransI.jpg)
 
@@ -17,7 +23,7 @@ The results show that spatial dependnece was significant Before moving forward, 
 
 ![Linear Regression Model](/aca_table_lm.jpg)
 
-These results show that, among the chosen variables, the only one which was not significant was the volume of plan selections in the Affordable Care Act per county. In order to account for the impact of spatial dependnece, spatial lag regression and spatial error regression resulted in the following:
+These results show that, among the chosen variables, the only one which was not significant was the volume of plan selections in the Affordable Care Act per county. In order to account for the impact of spatial dependnece, I used the spatial lag regression and spatial error regression tests, with results shown below.
 
 Spatial Lag Regression
 
